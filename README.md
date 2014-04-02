@@ -10,6 +10,7 @@ Creates a countdown image counting down to a specific time/date for use in email
 
 This generates an image based on the following variables:
 
+```php
   $image = imagecreatefrompng('images/countdown.png');
   $font = array(
     'size'=>23, // Font size, in pts usually.
@@ -19,5 +20,5 @@ This generates an image based on the following variables:
     'file'=>'./GillSans.ttc', // Font path
     'color'=>imagecolorallocate($image, 55, 160, 130), // RGB Colour of the text
   );
-
+```
 
