@@ -11,6 +11,9 @@
 	$frames = array();	
 	$delays = array();
 
+	//false = no loop
+	//0 = infinite
+	$loops = false; 
 
 	// Your image link
 	$image = imagecreatefrompng('images/countdown.png');
@@ -18,10 +21,10 @@
 	$delay = 100;// milliseconds
 
 	$font = array(
-		'size' => 23, // Font size, in pts usually.
+		'size' => 18, // Font size, in pts usually.
 		'angle' => 0, // Angle of the text
-		'x-offset' => 7, // The larger the number the further the distance from the left hand side, 0 to align to the left.
-		'y-offset' => 30, // The vertical alignment, trial and error between 20 and 60.
+		'x-offset' => 9, // The larger the number the further the distance from the left hand side, 0 to align to the left.
+		'y-offset' => 28, // The vertical alignment, trial and error between 20 and 60.
 		'file' => __DIR__ . DIRECTORY_SEPARATOR . 'Futura.ttc', // Font path
 		'color' => imagecolorallocate($image, 55, 160, 130), // RGB Colour of the text
 	);
@@ -33,13 +36,12 @@
 			// Open the first source image and add the text.
 			$image = imagecreatefrompng('images/countdown.png');
 			;
-			$text = $interval->format('00:00:00:00');
+			$text = $interval->format('00 00 00 00');
 			imagettftext ($image , $font['size'] , $font['angle'] , $font['x-offset'] , $font['y-offset'] , $font['color'] , $font['file'], $text );
 			ob_start();
 			imagegif($image);
 			$frames[]=ob_get_contents();
 			$delays[]=$delay;
-			$loops = 1;
 			ob_end_clean();
 			break;
 		} else {
@@ -52,7 +54,6 @@
 			imagegif($image);
 			$frames[]=ob_get_contents();
 			$delays[]=$delay;
-			$loops = 0;
 			ob_end_clean();
 		}
 
