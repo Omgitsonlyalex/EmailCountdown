@@ -46,7 +46,11 @@
 			// Open the first source image and add the text.
 			$image = imagecreatefrompng('images/countdown.png');
 			;
-			$text = $interval->format('0%a %H %I %S');
+			if ($interval->days > 9) {
+			    $text = $interval->format('%a %H %I %S');
+			} else {
+			    $text = $interval->format('0%a %H %I %S');
+			}
 			imagettftext ($image , $font['size'] , $font['angle'] , $font['x-offset'] , $font['y-offset'] , $font['color'] , $font['file'], $text );
 			ob_start();
 			imagegif($image);
